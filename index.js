@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+const Cors = require("cors");
 
 app.use(express.json());
+app.use(Cors());
 
 const produto = require ("./rotas/produto");
 const cor = require("./rotas/cor");

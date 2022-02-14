@@ -1,68 +1,70 @@
-const {Produto} = require("../bd");
+const { Produto, sequelize } = require("../bd");
 
-let controller = {};
+const controller = {};
 
 controller.criar = async (nome, valor, imagem, idcor, idmarca) => {
+
     try{
-       return await Produto.create({
-            nome,
-             valor, 
-             imagem,
-             idcor,
-             idmarca
-        });
-    } catch (erro) {
-        console.log(erro);
-        throw erro;
-    }
-};
-controller.listar = async () => {
-    try {
-        return await Produto.findAll({
-            attributes: ["nome", "valor", "imagem", "idcor", "idmarca"],
-            order: [["nome", "DESC"]],
-        });
-    } catch (erro) {
-        throw erro;
-    }
-};
-controller.buscarPorId = async (id) => {
-    try {
-        return await Produto.findByPk(id);
-    }catch (erro) {
-        throw erro;
-    }
-};
-controller.atualizar = async (id, { nome, valor, imagem, idcor, idmarca }) => {
-    try {
-    return await Produto.update(
+    return await Produto.create(
     {
         nome, 
         valor, 
         imagem, 
         idcor, 
         idmarca
+    });
+            } catch (erro) {
+            throw erro;
+            }
+        };
 
-    },
-    {
-        where: {
-            id
-        }
-    })
-    } catch (erro) {
-        throw erro;
-    }
-};
-controller.remover = async (id) => {
-    try {
-        return await Produto.destroy({
-            where: {
-                id,
+        controller.buscarPorId = async (id) => {//funcionando
+            try {
+                return await Produto.findByPk(id);
+
+            } catch (erro) {
+                throw erro;
+            }
+        };
+        controller.listar = async () => {//funcionando
+            try {
+                return await Produto.findAll({
+                    attributes: ["nome", "valor", "imagem", "idcor", "idmarca"],
+                
+                });
+            } catch (erro) {
+                throw erro;
+            }
+        };
+        controller.atualizar = async (id, { nome, valor, imagem, idcor, idmarca }) => {
+            try {
+            return await Produto.update(
+            {
+                nome, 
+                valor, 
+                imagem, 
+                idcor, 
+                idmarca
+               
             },
-        })
-    } catch (erro) {
-        throw erro;
-    }
-};
-
-module.exports = controller;
+            {
+                where: {
+                    id
+                }
+            })
+            } catch (erro) {
+                throw erro;
+            }
+        };
+        controller.remover = async (id) => {
+            try {
+                return await Produto.destroy({
+                    where: {
+                        id,
+                    },
+                })
+            } catch (erro) {
+                throw erro;
+            }
+        };
+    module.exports = controller;
