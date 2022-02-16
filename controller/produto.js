@@ -29,7 +29,7 @@ controller.criar = async (nome, valor, imagem, idcor, idmarca) => {
         controller.listar = async () => {//funcionando
             try {
                 return await Produto.findAll({
-                    attributes: ["nome", "valor", "imagem", "idcor", "idmarca"],
+                    attributes: ["id", "nome", "valor", "imagem", "idcor", "idmarca"],
                 
                 });
             } catch (erro) {
