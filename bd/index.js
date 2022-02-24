@@ -1,7 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-let initCor = require("./cor");
-let initMarca = require("./marca");
 let initProduto = require("./produto");
 
 const options = {
@@ -23,11 +21,6 @@ sequelize
 });
 
 const Produto = initProduto(sequelize, DataTypes);
-const Cor = initCor(sequelize, DataTypes);
-const Marca = initMarca(sequelize, DataTypes);
 
 
-Produto.belongsTo(Cor, { as: "cor", foreignKey: "idcor"});
-Produto.belongsTo(Marca, { as: "marca", foreignKey: "idmarca"});
-
-module.exports = { sequelize, Sequelize, Cor, Marca, Produto };
+module.exports = { sequelize, Sequelize, Produto };

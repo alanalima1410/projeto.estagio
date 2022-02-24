@@ -2,7 +2,7 @@ const { Produto, sequelize } = require("../bd");
 
 const controller = {};
 
-controller.criar = async (nome, valor, imagem, idcor, idmarca) => {
+controller.criar = async (nome, valor, imagem, cor, marca) => {
 
     try{
     return await Produto.create(
@@ -10,8 +10,8 @@ controller.criar = async (nome, valor, imagem, idcor, idmarca) => {
         nome, 
         valor, 
         imagem, 
-        idcor, 
-        idmarca
+        cor, 
+        marca
     });
             } catch (erro) {
             throw erro;
@@ -29,22 +29,23 @@ controller.criar = async (nome, valor, imagem, idcor, idmarca) => {
         controller.listar = async () => {//funcionando
             try {
                 return await Produto.findAll({
-                    attributes: ["id", "nome", "valor", "imagem", "idcor", "idmarca"],
+                    attributes: ["id", "nome", "valor", "imagem", "cor", "marca"],
+                    order: [["id"]],
                 
                 });
             } catch (erro) {
                 throw erro;
             }
         };
-        controller.atualizar = async (id, { nome, valor, imagem, idcor, idmarca }) => {
+        controller.atualizar = async (id, { nome, valor, imagem, cor, marca }) => {
             try {
             return await Produto.update(
             {
                 nome, 
                 valor, 
                 imagem, 
-                idcor, 
-                idmarca
+                cor, 
+                marca
                
             },
             {

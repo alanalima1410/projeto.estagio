@@ -18,28 +18,23 @@ module.exports = (sequelize, DataType) => {
             type: DataType.TEXT,
             allowNull: false,
         },
-        idcor: { //chave estrangeira
-            type: DataType.INTEGER,
+        cor: { //chave estrangeira
+            type: DataType.STRING(200),
             allowNull: false,
-            references: { //referenciando a chave estrangeira
-                model: 'cor',
-                key: "idcor",
-            },
     },
-    idmarca: { //chave estrangeira
-        type: DataType.INTEGER,
+
+    marca: { //chave estrangeira
+        type: DataType.STRING(200),
         allowNull: false,
-        references: { //referenciando a chave estrangeira
-            model: "marca",
-            key: "idmarca",
         },
+
         datacadastro: {
             type: DataType.DATE,
-            allowNull: false,
+            allowNull: true,
             toDefaultValue: new (Date),
         },
     },
-    },
+    
     {
         tableName: "produto",
         timestamps: false,

@@ -4,9 +4,9 @@ const { criar, buscarPorId, listar, atualizar, remover } = require("../controlle
 
 router.post("/", async (req, res) => {//funcionando para criar o produto!!!!
     try {
-        const { nome, valor, imagem, idcor, idmarca } = req.body;
+        const { nome, valor, imagem, cor, marca } = req.body;
          
-        const produtoCriado = await criar(nome, valor, imagem, idcor, idmarca);
+        const produtoCriado = await criar(nome, valor, imagem, cor, marca);
 
         res.send(produtoCriado);
     } catch (erro) {
@@ -30,13 +30,15 @@ router.put('/:id', async (req, res) => {// para atualizar os produtos funcionand
 console.log("produto");
 });
 
-router.get("/:id", async (req, res) => {// funcionando para listar os produtos
+router.get("/:id?", async (req, res) => {// funcionando para listar os produtos
     try {
         const { id } = req.params;
         let resposta;
         console.log(resposta);
         if(id){
             resposta = await buscarPorId(id);
+        } else {
+            resposta = await listar();
         }
 
         res.send(resposta);
